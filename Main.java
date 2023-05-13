@@ -10,12 +10,16 @@ public class Main {
         tree.put(13, "Shymkent");
         tree.put(45, "Semei");
         tree.put(71, "Taraz");
+        System.out.println(tree.size());
 
-        tree.delete(105);
+        tree.delete(90);
+        System.out.println(tree.size());
 
         for (var elem : tree) {
             System.out.println("Key is " + elem.key + " and value is " + elem.value);
         }
+
+        System.out.println(tree.get(75));
 
     }
 }
