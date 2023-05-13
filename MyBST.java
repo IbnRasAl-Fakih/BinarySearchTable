@@ -87,7 +87,7 @@ public class MyBST<K extends Comparable<K>, V> implements Iterable<MyBST.Pair<K,
                     node.key = maxNode.key;
                     node.value = maxNode.value;
 
-                    node = recDelete2(node, maxNode.key);
+                    node.left = recDelete(node.left, maxNode.key);
                 } else {
                     Node minNode = node.right;
                     while (minNode.left != null) {
@@ -96,26 +96,16 @@ public class MyBST<K extends Comparable<K>, V> implements Iterable<MyBST.Pair<K,
                     node.key = minNode.key;
                     node.value = minNode.value;
 
-                    node = recDelete2(node, minNode.key);
+                    node.right = recDelete(node.right, minNode.key);
                 }
             }
         }
-        node.size = (node.right != null ? node.right.size : 0) + (node.left != null ? node.left.size : 0);
+        node.size = (node.right != null ? node.right.size : 0) + (node.left != null ? node.left.size : 0) + 1;
         return node;
     }
 
-    private Node recDelete2(Node node, K key) {
-        int cmp = key.compareTo(node.key);
-
-        if (cmp > 0) {
-            node.right = recDelete2(node.right, key);
-        } else if (cmp < 0) {
-            node.left = recDelete2(node.left, key);
-        } else {
-            node = node.left != null ? node.left : node.right;
-        }
-
-        return node;
+    public int size() {
+        return root.size;
     }
 
     public static class Pair<K, V> {
